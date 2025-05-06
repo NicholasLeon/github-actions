@@ -12,7 +12,7 @@ jobs:
       - name: Send message to Discord
         uses: tsickert/discord-webhook@v1.0.2
         with:
-          webhook-url: ${{ https://discord.com/api/webhooks/1369200303773323365/Nnms3K5KXb0QiAD1rRe4iuoW5emZYB28uBIpr8qlcTMaCC0nOwTiIhSlnNWKiZJQABeH}}
+          webhook-url: ${{ secrets.DISCORD_WEBHOOK_URL }}
           username: GitHub Bot
           avatar-url: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
           content: |
