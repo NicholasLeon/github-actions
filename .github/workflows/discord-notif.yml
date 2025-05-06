@@ -1,36 +1,22 @@
-# This is a basic workflow to help you get started with Actions
+name: Notify Discord on Push
 
-name: CI
-
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches:
+      - main  # Atau ganti dengan branch lain
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  notify:
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v4
+      - name: Send message to Discord
+        uses: tsickert/discord-webhook@v1.0.2
+        with:
+          webhook-url: ${{ https://discord.com/api/webhooks/1369200303773323365/Nnms3K5KXb0QiAD1rRe4iuoW5emZYB28uBIpr8qlcTMaCC0nOwTiIhSlnNWKiZJQABeH}}
+          username: GitHub Bot
+          avatar-url: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
+          content: |
+            🚀 New push to **${{ github.repository }}**!
+            🧑‍💻 Commit by ${{ github.actor }}
+            🔗 [View commit](https://github.com/${{ github.repository }}/commit/${{ github.sha }})
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
