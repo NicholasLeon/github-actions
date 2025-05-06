@@ -6,17 +6,13 @@ on:
       - main 
 
 jobs:
-  notify:
+   notify:
     runs-on: ubuntu-latest
     steps:
       - name: Send message to Discord
-        uses: tsickert/discord-webhook@v1.0.2
-        with:
-          webhook-url: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          username: GitHub Bot
-          avatar-url: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
-          content: |
-            🚀 New push to **${{ github.repository }}**!
-            🧑‍💻 Commit by ${{ github.actor }}
-            🔗 [View commit](https://github.com/${{ github.repository }}/commit/${{ github.sha }})
+        run: |
+          curl -H "Content-Type: application/json" \
+            -X POST \
+            -d "{\"content\": \"🚀 New push to **${{ github.repository }}** by ${{ github.actor }}\n🔗 <https://github.com/${{ github.repository }}/commit/${{ github.sha }}>\"}" \
+            ${{ secrets.DISCORD_WEBHOOK_URL }}
 
